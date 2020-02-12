@@ -172,19 +172,23 @@ Game.Draw = function(context, snake) {
     // Draw Snake
     for (var i = 0; i < snake.stage.length.length; i++) {
       var cell = snake.stage.length[i];
-      this.drawCell(cell.x, cell.y);
+      this.drawCell(cell.x, cell.y, 'snake');
     }
     
     // Draw Food
-    this.drawCell(snake.stage.food.x, snake.stage.food.y);
+    this.drawCell(snake.stage.food.x, snake.stage.food.y, 'food');
     
     // Draw Score
     context.fillText('Score: ' + snake.stage.score, 5, (snake.stage.height - 5));
   };
   
   // Draw Cell
-  this.drawCell = function(x, y) {
-    context.fillStyle = 'rgb(170, 170, 170)';
+  this.drawCell = function(x, y, typeOfCell) {
+		if (typeOfCell == 'food')
+			context.fillStyle = 'rgb(107, 132, 255)';
+		else {
+			context.fillStyle = 'rgb(107, 255, 154)';
+		}
     context.beginPath();
     context.arc((x * snake.stage.conf.cw + 6), (y * snake.stage.conf.cw + 6), 4, 0, 2*Math.PI, false);    
     context.fill();
